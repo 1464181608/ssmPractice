@@ -45,15 +45,15 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">学生管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/student_layui">学生名单</a></dd>
+                        <dd><a href="/student_layui;">学生名单</a></dd>
                         <dd><a href="/addStudent_layui">学生信息录入</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">班级管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/studentClass;">班级名单</a></dd>
-                        <dd><a href="javascript:;">班级信息录入</a></dd>
+                        <dd><a href="/studentClass">班级名单</a></dd>
+                        <dd><a href="/addStudentClass:;">班级信息录入</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -67,10 +67,11 @@
                     <a href="javascript:;">入住管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/roomIn">入住信息</a></dd>
-                        <dd><a href="javascript:;">list 2</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="/addRoomIn">新生入住</a></dd>
+                        <dd><a href="javascript:;">入住变更</a></dd>
                     </dl>
                 </li>
+            </ul>
         </div>
     </div>
 

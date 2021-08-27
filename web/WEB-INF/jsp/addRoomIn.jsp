@@ -42,7 +42,7 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域 -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">学生管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/student_layui;">学生名单</a></dd>
@@ -60,10 +60,10 @@
                     <a href="javascript:;">房间管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/room">房间信息</a></dd>
-                        <dd><a href="javascript:;">新增房间</a></dd>
+                        <dd><a href="/addRoom">新增房间</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">入住管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/roomIn">入住信息</a></dd>
