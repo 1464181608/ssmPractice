@@ -18,24 +18,6 @@
     <div class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black">layout demo</div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <!-- 移动端显示 -->
-            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
-                <i class="layui-icon layui-icon-spread-left"></i>
-            </li>
-
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 1</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 2</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 3</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">nav groups</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">menu 11</a></dd>
-                    <dd><a href="">menu 22</a></dd>
-                    <dd><a href="">menu 33</a></dd>
-                </dl>
-            </li>
-        </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:;">
@@ -63,7 +45,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">学生管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/student_layui;">学生名单</a></dd>
+                        <dd><a href="/student_layui">学生名单</a></dd>
                         <dd><a href="/addStudent_layui">学生信息录入</a></dd>
                     </dl>
                 </li>
@@ -71,7 +53,7 @@
                     <a class="" href="javascript:;">班级管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/studentClass">班级名单</a></dd>
-                        <dd><a href="/addStudentClass:;">班级信息录入</a></dd>
+                        <dd><a href="/addStudentClass">班级信息录入</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

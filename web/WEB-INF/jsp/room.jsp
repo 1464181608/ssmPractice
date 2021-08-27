@@ -26,7 +26,7 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">学生管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/student_layui;">学生名单</a></dd>
+                        <dd><a href="/student_layui">学生名单</a></dd>
                         <dd><a href="/addStudent_layui">学生信息录入</a></dd>
                     </dl>
                 </li>
@@ -34,7 +34,7 @@
                     <a class="" href="javascript:;">班级管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/studentClass">班级名单</a></dd>
-                        <dd><a href="/addStudentClass:;">班级信息录入</a></dd>
+                        <dd><a href="/addStudentClass">班级信息录入</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
