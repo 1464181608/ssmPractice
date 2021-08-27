@@ -14,7 +14,7 @@
 
 ### 班级管理（实现）
 
-![img](file:///C:\Users\Lenovo\Documents\Tencent Files\1464181608\Image\C2C\_(X2S21H})$LGRIDR09S63U.png)
+![_(X2S21H})$LGRIDR09S63U](https://user-images.githubusercontent.com/76779590/131141815-5e01dc96-fdda-4055-ae21-3b36d4c24fda.png)
 
 班级信息增删改查，支持上图表单查询，辅导员姓名支持模糊查询。
 
