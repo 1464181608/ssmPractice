@@ -30,7 +30,7 @@
 
 ![image](https://user-images.githubusercontent.com/76779590/131142074-6c54bed8-23f8-4e6c-9506-6f6d3174fdc9.png)
 
-emm，也没啥好说的。。
+emm，也没啥好说的。。。
 
 ### 房间管理（实现）
 
