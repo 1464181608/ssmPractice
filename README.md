@@ -1,3 +1,7 @@
+## 技术栈：
+后端：MySQL，JAVA,Spring，SpringMVC，Mybatis，Maven，分页插件pagehelper，jackson  
+前端：基于Layui框架([戳我前往layui官网](https://www.layui.com))，有文档和模板，只需写部分html和js业务代码即可  
+
 ## 数据表设计：
 
 管理员表t_admin（id，用户名，密码，姓名，手机号码）  
