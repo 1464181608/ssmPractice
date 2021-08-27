@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    
+    <typeAliases>
+        <package name="com.ssdut.pojo"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+    
+    <mappers>
+        <mapper class="com.ssdut.dao.StudentMapper"/>
+        <mapper class="com.ssdut.dao.StudentClassMapper"/>
+        <mapper class="com.ssdut.dao.RoomMapper"/>
+        <mapper class="com.ssdut.dao.RoomInMapper"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--DispatchServlet-->
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:applicationContext.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!--乱码过滤-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
+    
+    
+    <servlet>
+        <servlet-name>indexToStudent</servlet-name>
+        <jsp-file>/WEB-INF/jsp/student_layui.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>indexToStudent</servlet-name>
+        <url-pattern>/student_layui</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toAddStudent</servlet-name>
+        <jsp-file>/WEB-INF/jsp/addStudent_layui.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toAddStudent</servlet-name>
+        <url-pattern>/addStudent_layui</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toStudentClass</servlet-name>
+        <jsp-file>/WEB-INF/jsp/studentClass.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toStudentClass</servlet-name>
+        <url-pattern>/studentClass</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toAddStudentClass</servlet-name>
+        <jsp-file>/WEB-INF/jsp/addStudentClass.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toAddStudentClass</servlet-name>
+        <url-pattern>/addStudentClass</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toRoom</servlet-name>
+        <jsp-file>/WEB-INF/jsp/room.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toRoom</servlet-name>
+        <url-pattern>/room</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toAddRoom</servlet-name>
+        <jsp-file>/WEB-INF/jsp/addRoom.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toAddRoom</servlet-name>
+        <url-pattern>/addRoom</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toRoomIn</servlet-name>
+        <jsp-file>/WEB-INF/jsp/roomIn.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toRoomIn</servlet-name>
+        <url-pattern>/roomIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>toAddRoomIn</servlet-name>
+        <jsp-file>/WEB-INF/jsp/addRoomIn.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>toAddRoomIn</servlet-name>
+        <url-pattern>/addRoomIn</url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssdut.dao.RoomMapper">
+
+    <insert id="insertRoom" parameterType="room">
+        insert into dormitory.t_room(building, number, bed_total) VALUES
+        (#{building},#{number},#{bedTotal})
+    </insert>
+
+    <delete id="deleteRoom" parameterType="_int">
+        delete from dormitory.t_room where r_id = #{rid}
+    </delete>
+
+    <update id="updateRoom" parameterType="room">
+        update dormitory.t_room
+        <set>
+            <if test="building!=null">
+                building = #{building}
+            </if>
+            <if test="number!=null">
+                and number = #{number}
+            </if>
+            <if test="bedTotal!=null">
+                and bed_total = #{bedTotal}
+            </if>
+        </set>
+        where r_id = #{rid}
+    </update>
+
+    <select id="getRoom" parameterType="map" resultType="room">
+        select r.r_id rid,r.building,r.number,r.bed_total bedTotal,count(i.s_id) bedUsed
+        from dormitory.t_room r left join dormitory.t_room_in i on r.r_id = i.r_id
+        <where>
+            <if test="building!=null">
+                r.building = #{building}
+            </if>
+            <if test="number!=null">
+                and r.number = #{number}
+            </if>
+            <if test="bedTotal!=null">
+                and r.bed_total = #{bedTotal}
+            </if>
+            <if test="rid!=null">
+                and r.r_id = #{rid}
+            </if>
+        </where>
+        group by r.r_id
+        <if test="getBedRestRoom!=null">
+            having count(i.s_id) &lt; r.bed_total
+        </if>
+    </select>
+
+    <select id="getNextRoomByBuilding" resultType="string">
+        select ifnull(max(number),concat(#{floor},'00'))
+        from dormitory.t_room
+        where building = #{building} and number like concat(#{floor},'%')
+    </select>
+
+</mapper>

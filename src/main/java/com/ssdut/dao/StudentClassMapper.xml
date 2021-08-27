@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssdut.dao.StudentClassMapper">
+
+    <resultMap id="baseStudentClassResultMap" type="studentClass">
+        <id property="cid" column="c_id"/>
+        <result property="name" column="name"/>
+        <result property="major" column="major"/>
+        <result property="counsellorName" column="counsellor_name"/>
+        <result property="counsellorPhone" column="counsellor_phone"/>
+    </resultMap>
+
+    <sql id="base_t_class_column_list">
+        c_id,name,major,counsellor_name,counsellor_phone
+    </sql>
+
+    <select id="getStudentClassList" parameterType="map" resultMap="baseStudentClassResultMap">
+        select <include refid="base_t_class_column_list"/> from dormitory.t_class
+        <where>
+            <if test="name!=null">
+                name = #{name}
+            </if>
+            <if test="major!=null">
+                and major = #{major}
+            </if>
+            <if test="counsellorName!=null">
+                and counsellor_name like concat('%',#{counsellorName},'%')
+            </if>
+            <if test="counsellorPhone!=null">
+                and counsellor_phone = #{counsellorPhone}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllStudentClassList" resultType="studentClass">
+        select c.c_id cid,c.name,c.major,c.counsellor_name counsellorName,c.counsellor_phone counsellorPhone,count(s.s_id) "count"
+        from dormitory.t_class c left join dormitory.t_student s on c.c_id = s.c_id
+        group by cid
+    </select>
+
+    <insert id="insertStudentClass" parameterType="studentClass">
+        insert into dormitory.t_class(name, major, counsellor_name, counsellor_phone) VALUES
+        (#{name},#{major},#{counsellorName},#{counsellorPhone});
+    </insert>
+
+    <delete id="deleteStudentClass">
+        delete from dormitory.t_class where c_id = #{cid}
+    </delete>
+
+    <update id="updateStudentClass" parameterType="studentClass">
+        update dormitory.t_class
+        <set>
+            <if test="major!=null">
+                major = #{major},
+            </if>
+            <if test="counsellorName!=null">
+                counsellor_name = #{counsellorName},
+            </if>
+            <if test="counsellorPhone!=null">
+                counsellor_phone = #{counsellorPhone}
+            </if>
+        </set>
+        where c_id = #{cid}
+    </update>
+
+</mapper>

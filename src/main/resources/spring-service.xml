@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--1.扫描service下的包-->
+    <context:component-scan base-package="com.ssdut.service"/>
+    <!--2.将所有业务类注入到Spring-->
+    <bean id="StudentServiceImpl" class="com.ssdut.service.StudentServiceImpl">
+        <property name="studentMapper" ref="studentMapper"/>
+    </bean>
+    <bean id="StudentClassServiceImpl" class="com.ssdut.service.StudentClassServiceImpl">
+        <property name="studentClassMapper" ref="studentClassMapper"/>
+    </bean>
+    <bean id="RoomServiceImpl" class="com.ssdut.service.RoomServiceImpl">
+        <property name="roomMapper" ref="roomMapper"/>
+    </bean>
+    <bean id="RoomInServiceImpl" class="com.ssdut.service.RoomInServiceImpl">
+        <property name="roomInMapper" ref="roomInMapper"/>
+    </bean>
+    <!--3.声明式事物-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--AOP事物支持-->
+
+</beans>

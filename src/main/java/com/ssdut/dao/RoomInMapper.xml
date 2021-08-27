@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssdut.dao.RoomInMapper">
+
+    <insert id="insertRoomIn" parameterType="map">
+        insert into dormitory.t_room_in(r_id, s_id, bed_number) VALUES
+        (#{rid},#{sid},#{bedNumber});
+    </insert>
+
+    <resultMap id="classResultMap" type="studentClass">
+        <id property="cid" column="c_id"/>
+        <result property="name" column="cname"/>
+        <result property="major" column="major"/>
+        <result property="counsellorName" column="counsellorName"/>
+        <result property="counsellorPhone" column="counsellorPhone"/>
+    </resultMap>
+
+    <resultMap id="studentResultMap" type="student">
+        <id property="sid" column="s_id"/>
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="phone" column="sphone"/>
+        <association property="studentClass" resultMap="classResultMap"/>
+    </resultMap>
+
+    <resultMap id="roomResultMap" type="room">
+        <id property="rid" column="r_id"/>
+        <result property="building" column="building"/>
+        <result property="number" column="number"/>
+        <result property="bedTotal" column="bedTotal"/>
+    </resultMap>
+
+    <resultMap id="roomInResultMap" type="roomIn">
+        <id property="rid" column="r_in_id"/>
+        <result property="bedNumber" column="bedNumber"/>
+        <association property="room" resultMap="roomResultMap"/>
+        <association property="student" resultMap="studentResultMap"/>
+    </resultMap>
+
+    <select id="getAllRoomIn" resultMap="roomInResultMap">
+        select ri.r_in_id r_in_id,ri.r_id r_id,ri.s_id s_id,ri.bed_number bedNumber,
+               r.building building,r.number number,r.bed_total bedTotal,
+               s.id sid,s.name sname,s.sex sex,s.age age,s.phone sphone,
+               c.c_id c_id,c.name cname,c.major major,c.counsellor_phone counsellorPhone,c.counsellor_name counsellorName
+        from dormitory.t_room_in ri,dormitory.t_room r,dormitory.t_student s,dormitory.t_class c
+        where ri.r_id = r.r_id and ri.s_id = s.s_id and s.c_id = c.c_id
+    </select>
+
+    <select id="getRoomIn" parameterType="map" resultMap="roomInResultMap">
+        select ri.r_in_id r_in_id,ri.r_id r_id,ri.s_id s_id,ri.bed_number bedNumber,
+               r.building building,r.number number,r.bed_total bedTotal,
+               s.id sid,s.name sname,s.sex sex,s.age age,s.phone sphone,
+               c.c_id c_id,c.name cname,c.major major,c.counsellor_phone counsellorPhone,c.counsellor_name counsellorName
+        from dormitory.t_room_in ri,dormitory.t_room r,dormitory.t_student s,dormitory.t_class c
+        where ri.r_id = r.r_id and ri.s_id = s.s_id and s.c_id = c.c_id
+        <if test="building!=null">and r.building = #{building}</if>
+        <if test="number!=null">and r.number = #{number}</if>
+        <if test="bedNumber!=null">and ri.bed_number = #{bedNumber}</if>
+        <if test="id!=null">and s.id = #{id}</if>
+        <if test="name!=null">and s.name = #{name}</if>
+        <if test="major!=null">and c.major = #{major}</if>
+        <if test="className!=null">and c.name = #{className}</if>
+    </select>
+
+    <select id="getNextFreeRoom" resultType="string">
+        select min(t.number)
+        from (
+                 select count(ri.s_id) c, r.number number,r.r_id rid
+                 from dormitory.t_room_in ri right join dormitory.t_room r on ri.r_id = r.r_id
+                 where r.building = #{building}
+                   and r.number like concat(#{floor}, '%')
+                 group by ri.r_id
+             ) t join dormitory.t_room t2 on t.rid = t2.r_id
+        where t.c &lt; t2.bed_total
+    </select>
+
+    <select id="getNextFreeBedNumber" resultType="_int">
+        select count(*) + 1
+        from dormitory.t_room_in ri join dormitory.t_room r on ri.r_id = r.r_id
+        where r.building = #{building} and r.number = #{number};
+    </select>
+
+</mapper>

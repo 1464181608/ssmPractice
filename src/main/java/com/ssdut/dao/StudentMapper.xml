@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssdut.dao.StudentMapper">
+    
+    <insert id="insertStudent" parameterType="student">
+        insert into dormitory.t_student(id, name, sex, age, phone, c_id) VALUES
+        (#{id},#{name},#{sex},#{age},#{phone},#{studentClass.cid});
+    </insert>
+
+    <delete id="deleteStudent">
+        delete from dormitory.t_student where s_id = #{sid}
+    </delete>
+
+    <update id="updateStudent" parameterType="student">
+        update dormitory.t_student
+        <set>
+            <if test="id!=null">
+                id = #{id},
+            </if>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="sex!=null">
+                sex = #{sex},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="phone!=null">
+                phone = #{phone},
+            </if>
+            <if test="studentClass!=null">
+                c_id = #{studentClass.cid}
+            </if>
+        </set>
+        where s_id = #{sid}
+    </update>
+
+    <select id="getStudentCount" parameterType="map" resultType="_int">
+        select count(*)
+        from dormitory.t_student s
+        <where>
+            <if test="sid!=null"> and s.s_id = #{sid}</if>
+            <if test="id!=null"> and s.id = #{id}</if>
+            <if test="name!=null"> and s.name like concat('%',#{name},'%')</if>
+            <if test="sex!=null"> and s.sex = #{sex}</if>
+            <if test="age_min!=null and age_max!=null"> and s.age between #{age_min} and #{age_max}</if>
+            <if test="phone!=null"> and s.phone = #{phone}</if>
+            <if test="cid!=null"> and s.c_id in ( ${cid} )</if>
+        </where>
+    </select>
+
+    <resultMap id="classResultMap" type="studentClass">
+        <id property="cid" column="c_id"/>
+        <result property="name" column="cname"/>
+        <result property="major" column="major"/>
+        <result property="counsellorName" column="counsellor_name"/>
+        <result property="counsellorPhone" column="counsellor_phone"/>
+    </resultMap>
+
+    <resultMap id="studentResultMap" type="student">
+        <id property="sid" column="s_id"/>
+        <result property="id" column="id"/>
+        <result property="name" column="sname"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="phone" column="sphone"/>
+        <result property="hasRoom" column="hasRoom"/>
+        <association property="studentClass" resultMap="classResultMap"/>
+    </resultMap>
+
+    <select id="getAllStudent" resultMap="studentResultMap">
+        select s.s_id,s.id,s.name sname,s.sex,s.age,s.phone sphone,
+               c.name cname,c.major,c.counsellor_name,c.counsellor_phone,
+               !isnull(ri.bed_number) hasRoom
+        from dormitory.t_class c,dormitory.t_student s left join dormitory.t_room_in ri on s.s_id = ri.s_id
+        where s.c_id = c.c_id
+    </select>
+
+    <select id="getStudent" parameterType="map" resultMap="studentResultMap">
+        select s.s_id,s.id,s.name sname,s.sex,s.age,s.phone sphone,
+               c.name cname,c.major,c.counsellor_name,c.counsellor_phone,
+               !isnull(ri.bed_number) hasRoom
+        from dormitory.t_class c,dormitory.t_student s left join dormitory.t_room_in ri on s.s_id = ri.s_id
+        where s.c_id = c.c_id
+            <if test="sid!=null"> and s.s_id = #{sid}</if>
+            <if test="id!=null"> and s.id = #{id}</if>
+            <if test="name!=null"> and s.name like concat('%',#{name},'%')</if>
+            <if test="sex!=null"> and s.sex = #{sex}</if>
+            <if test="age_min!=null and age_max!=null"> and s.age between #{age_min} and #{age_max}</if>
+            <if test="phone!=null"> and s.phone = #{phone}</if>
+            <if test="cid!=null"> and s.c_id in ( ${cid} )</if>
+    </select>
+
+</mapper>
