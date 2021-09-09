@@ -37,6 +37,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.4" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.4" />
           <element id="library" level="application" name="jquery" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.7" />
         </element>
       </element>
     </root>
